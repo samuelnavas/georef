@@ -28,11 +28,7 @@
       var debugline;
       var debugPoints = [];
 
-      introJs().setOptions({ 
-        'exitOnOverlayClick': 'false', 
-        'showStepNumbers': 'false', 
-        'showStepNumbers': 'false'
-      }).start();
+      introJs().setOptions({ 'exitOnOverlayClick': 'false', 'showStepNumbers': 'false', 'showStepNumbers': 'false'}).start();
 
       function callback(result) {
         if (result){
