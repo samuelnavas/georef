@@ -1,5 +1,7 @@
 # GeoRef
-A manual georeference of walkthrough videos prototype 
+A manual georeference of walkthrough videos prototype. 
+
+**DEMO:** http://samuelnavas.github.io/georef/
 
 ### Abstract
 
@@ -16,3 +18,6 @@ This study proposes and evaluate a new method for the manual capture and extract
 - Victor.js
 - Intro.js
 - Font Awesome
+
+### Licence
+This code is licenced under GNU v3
