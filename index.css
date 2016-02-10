@@ -79,7 +79,7 @@
       z-index: 9;
   }
 
-  #sugestedPlaces {
+  .places {
     color:blue;
     text-decoration: underline;
     cursor: pointer;

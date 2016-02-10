@@ -175,37 +175,7 @@
           }  
         });
 
-        // GEOPARSING
-        var videoTitle = $( "select option:selected" ).text();
-        videoTitle = encodeURIComponent(videoTitle.trim());
-        var gmapsAPI = "http://maps.googleapis.com/maps/api/geocode/json?language=en&address=";
-        console.log(gmapsAPI+videoTitle);
-        var jsonData = $.ajax({
-              url:gmapsAPI+videoTitle,
-              dataType:"json",
-              async:true,
-              success: function(json){
-                removeChilds(document.getElementById("sugestedPlaces"));
-                while (sugestedPlaces.firstChild) {
-                  sugestedPlaces.removeChild(sugestedPlaces.firstChild);
-                }
-                $.each(json.results, function(k,v) {
-                  var node = document.createElement("LI");
-                  //var lat = v['geometry']['location']['lat'];
-                  //var lng = v['geometry']['location']['lng'];
-                  //var place = L.latLng(v['geometry']['location']['lat'], v['geometry']['location']['lng']);
-                  var southWest = L.latLng(v['geometry']['viewport']['northeast']['lat'], v['geometry']['viewport']['northeast']['lng']);
-                  var northEast = L.latLng(v['geometry']['viewport']['southwest']['lat'], v['geometry']['viewport']['southwest']['lng']);
-                  var bounds = L.latLngBounds(southWest, northEast);
-                  var textnode = document.createTextNode(v['formatted_address']);
-                  node.appendChild(textnode);
-                  //node.addEventListener("click",function(){locatePlace(map,lat,lng)});
-                  node.addEventListener("click",function(){map.fitBounds(bounds)});
-                  document.getElementById("sugestedPlaces").appendChild(node);
-                });
-              myTimer = new Date();
-              }
-            }).responseText;
+        geoCode("AUTOMATIC");
 
       }
 
@@ -806,6 +776,44 @@
       function save(){
         parseKML();
         parseKML2();
+      }
+
+      function geoCode(option){
+        // GEOPARSING
+        if(option==="AUTOMATIC"){
+          var place = $( "select option:selected" ).text();
+          place = encodeURIComponent(place.trim());
+          var list = document.getElementById("sugestedPlaces");
+        } else {
+          var place = document.getElementById("search").value;
+          var list = document.getElementById("searchPlaces");
+        }
+        var gmapsAPI = "http://maps.googleapis.com/maps/api/geocode/json?language=en&address=";
+        console.log(gmapsAPI+place);
+        var jsonData = $.ajax({
+              url:gmapsAPI+place,
+              dataType:"json",
+              async:true,
+              success: function(json){
+                removeChilds(list);
+                $.each(json.results, function(k,v) {
+                  var node = document.createElement("LI");
+                  var southWest = L.latLng(v['geometry']['viewport']['northeast']['lat'], v['geometry']['viewport']['northeast']['lng']);
+                  var northEast = L.latLng(v['geometry']['viewport']['southwest']['lat'], v['geometry']['viewport']['southwest']['lng']);
+                  var bounds = L.latLngBounds(southWest, northEast);
+                  var textnode = document.createTextNode(v['formatted_address']);
+                  node.appendChild(textnode);
+                  node.addEventListener("click",function(){map.fitBounds(bounds)});
+                  list.appendChild(node);
+                });
+              myTimer = new Date();
+              }
+            }).responseText;
+      }
+
+      function search(){
+        console.log("MANUAL SEARCH CLICKED");
+        geoCode("MANUAL");
       }
 
       console.log("Javascript loaded");

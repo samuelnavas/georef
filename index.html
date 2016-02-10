@@ -15,6 +15,8 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" 
           integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <!-- Leaflet -->
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
     <!-- IntroJS -->
@@ -43,21 +45,21 @@
         data-step="6">
       </div>
       <div class="col-md-4" id="section">
-        <!--
-        <br>  Participant number <input id="participant" type="number"> <br> </br> -->
         <div class="alignleft">
           <b>Routing options:</b> </br>
           <div class="btn-group" data-toggle="buttons">
             <label class="btn btn-primary active"> 
-              <input type="radio" name="options" onchange="changevehicle(this)" value="foot" checked> Walk
+              <input type="radio" name="options" onchange="changevehicle(this)" value="foot" checked> 
+              <i class="fa fa-male"></i>
             </label>
             <label class="btn btn-primary">
-              <input type="radio" name="options" onchange="changevehicle(this)" value="bike"> Bike
+              <input type="radio" name="options" onchange="changevehicle(this)" value="bike"> 
+              <i class="fa fa-bicycle"></i>
             </label>
-            <!--
             <label class="btn btn-primary">
-              <input type="radio" name="options" onchange="changevehicle(this)" value="car"> Car
-            </label> -->
+              <input type="radio" name="options" onchange="changevehicle(this)" value="car"> 
+              <i class="fa fa-car"></i>
+            </label> 
           </div>
         </div>
         <div class="alignright" data-intro='When you finish, you have to <b>save the geotag</b> pressing the <span class="text-success">
@@ -65,10 +67,10 @@
               data-step="7">
           <b> Save: &nbsp; Info:</b> </br>
           <button id="save-button" type="submit" class="btn btn-success" onclick="save()">
-            <span id="save-icon" class="glyphicon glyphicon-save" aria-hidden="true"></span>
+            <span id="save-icon" class="fa fa-download" aria-hidden="true"></span>
           </button> 
           <button id="save-button" type="submit" class="btn btn-info" onclick="introJs().start()">
-            <span id="save-icon" class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+            <span id="save-icon" class="fa fa-info-circle" aria-hidden="true"></span>
           </button>
         </div>
         <div style="clear: both;"></div>
@@ -105,14 +107,14 @@
                                <li>Fullscreen: F12</li> </ul>' 
               data-step="3">
           <button type="button" class="btn btn-default" id="rewind" onclick="fullScreen()">
-            <span class="glyphicon glyphicon-resize-full" aria-hidden="true"></span>
+            <span class="fa fa-expand" aria-hidden="true"></span>
           </button>
           <button type="button" class="btn btn-default" id="playPause" onclick="playPause()">
-            <span class="glyphicon glyphicon-play" aria-hidden="true"></span> / 
-            <span class="glyphicon glyphicon-pause" aria-hidden="true"></span>
+            <span class="fa fa-play" aria-hidden="true"></span> / 
+            <span class="fa fa-pause" aria-hidden="true"></span>
           </button>
           <button type="button" class="btn btn-default" id="rewind" onclick="rewind()">
-            <span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>
+            <span class="fa fa-step-backward" aria-hidden="true"></span>
           </button>
           <div class="btn-group" data-toggle="buttons">
               <label class="btn btn-default active">
@@ -137,10 +139,22 @@
         <!--<form >
           <input type="checkbox" id="showcaptionscheck" onclick="check(this)"> Show/Hide extraction status<br>
         </form>-->
-        <div data-intro="In the <b>sugested places</b> area you can find places wich may correspond to the video location. 
-                         Why don't you try to click in the <b>Münster</b> suggestion?" data-step="5"
+        <div data-intro="In the <b>sugested places</b> area you can find places wich may correspond to the video location. <br> 
+                         Or if you prefer, you can perform a manual text-based search of a geographic place" data-step="5">
           </br><b>Sugested places:</b>
-          <ul id="sugestedPlaces" style="list-style-type:none">
+          <ul id="sugestedPlaces" class="places" style="list-style-type:none">
+          </ul>
+          </br><b>Manual search:</b>
+          <div class="input-group">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button" onclick="search()">
+                <span id="save-icon" class="fa fa-search" aria-hidden="true"></span>
+              </button>
+            </span>
+            <input type="text" class="form-control" placeholder="Search for..." id="search">
+            <p></p>
+          </div>
+          <ul id="searchPlaces" class="places" style="list-style-type:none">
           </ul>
         </div>
       </div>
@@ -184,6 +198,8 @@
     <script type="text/javascript" src="introjs/intro.js"></script>
     <script type="text/javascript" src="js/waypoint.js"></script>
     <script type="text/javascript" src="js/keyboard.js"></script>
+    <script type="text/javascript" src="js/video.js"></script>
+    <script type="text/javascript" src="js/interpolation.js"></script>
     <script type="text/javascript" src="js/parseKML.js"></script>
     <script type="text/javascript" src="index.js"></script>
   </body>
