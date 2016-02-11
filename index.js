@@ -89,6 +89,12 @@
                 maxZoom:19 
         }).addTo(map);
         map.attributionControl.setPrefix('<a href="http://leafletjs.com/" target=blank> Leaflet</a>');
+        var baseMaps = {
+          "OSM Mapnik": mapnik,
+          "Google streets": new L.Google('ROADMAP'),
+          "Google satellite": new L.Google('HYBRID')
+        };
+        L.control.layers(baseMaps).addTo(map);
         //map.fitBounds(L.latLngBounds(L.latLng(55.05812359,15.0418962),L.latLng(47.2701115,5.8663425)));
         path = L.polyline([], {color: 'blue', opacity:0}).addTo(map);
         if (debug) debugline = L.polyline([], {color: 'green'}).addTo(map);
