@@ -28,7 +28,8 @@
       var debugline;
       var debugPoints = [];
 
-      introJs().setOptions({ 'exitOnOverlayClick': 'false', 'showStepNumbers': 'false', 'showStepNumbers': 'false'}).start();
+      startTutorial('false');
+      //introJs().setOptions({ 'exitOnOverlayClick': 'false', 'showStepNumbers': 'false', 'showStepNumbers': 'false'}).start();
 
       function callback(result) {
         if (result){
@@ -80,20 +81,43 @@
                 //crs: L.CRS.EPSG3857,
                 //crs: L.CRS.Simple,
         }).setView([49.4252669, 7.6240972], 4);
-        L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        //L.tileLayer('http://a.tiles.mapbox.com/v4/mapbox.mapbox-streets-v6/14/4823/6160.vector.pbf?access_token=pk.eyJ1Ijoic25hdmFzIiwiYSI6ImNpaG96Mm9rOTAwMDJ1eGtxeWoxbjJ4c2sifQ.NemNiPbB_mKOAKTckz9u_A', {
 
-                attribution:  '(c) <a href="http://openstreetmap.org" target="_blank">OpenStreetMap</a> contributors |'+
-                              ' Powered by <a href="https://graphhopper.com/#directions-api" target="_blank">GraphHopper API</a> |'+
-                              ' Samuel Navas Medrano',
-                maxZoom:19 
+        map.attributionControl.setPrefix('<a href="http://leafletjs.com/" target=blank> Leaflet</a> |'+
+                                   'Powered by <a href="https://graphhopper.com/#directions-api" target="_blank">GraphHopper API</a> |'+
+                                   'Samuel Navas Medrano');
+
+        var mapnik = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution:  '(c) <a href="http://openstreetmap.org" target="_blank">OpenStreetMap</a> contributors',
+          maxZoom:19 
         }).addTo(map);
-        map.attributionControl.setPrefix('<a href="http://leafletjs.com/" target=blank> Leaflet</a>');
+
+        var MapQuestOpen_OSM = L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/{type}/{z}/{x}/{y}.{ext}', {
+          type: 'map',
+          ext: 'jpg',
+          attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+          subdomains: '1234'
+        });
+
+        var Thunderforest_OpenCycleMap = L.tileLayer('http://{s}.tile.thunderforest.com/cycle/{z}/{x}/{y}.png', {
+          attribution: '&copy; <a href="http://www.opencyclemap.org">OpenCycleMap</a>, &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        });
+
+        var Thunderforest_Transport = L.tileLayer('http://{s}.tile.thunderforest.com/transport/{z}/{x}/{y}.png', {
+          attribution: '&copy; <a href="http://www.opencyclemap.org">OpenCycleMap</a>, &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+          maxZoom: 19
+        });
+
+        var Esri_WorldImagery = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+          attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+        });
+
         var baseMaps = {
-          "OSM Mapnik": mapnik,
-          "Google streets": new L.Google('ROADMAP'),
-          "Google satellite": new L.Google('HYBRID')
+          "Street map": mapnik,
+          "Cycle map": Thunderforest_OpenCycleMap,
+          "Public transport": Thunderforest_Transport,
+          "Satellite" : Esri_WorldImagery
         };
+
         L.control.layers(baseMaps).addTo(map);
         //map.fitBounds(L.latLngBounds(L.latLng(55.05812359,15.0418962),L.latLng(47.2701115,5.8663425)));
         path = L.polyline([], {color: 'blue', opacity:0}).addTo(map);
@@ -303,7 +327,7 @@
         //var xywh = c[i].text.substr(c[i].text.indexOf("=")+1).split(',');
         //t.style.backgroundImage = 'url(videos/'+c[i]+')';
         //console.log('videos/img'+pad(i,3)+'.jpg');
-        t.style.backgroundImage = 'url(videos/'+video_name+'/img'+pad(i,3)+'.jpg)';
+        t.style.backgroundImage = 'url(http://geotag.samuelnavas.es/videos/'+video_name+'/img'+pad(i,3)+'.jpg)';
         t.style.backgroundSize = '160px 90px';
         //console.log('url(videos/img'+pad(i,3)+'.jpg)');
         t.style.backgroundPosition = '-'+0+'px -'+0+'px';
@@ -820,6 +844,13 @@
       function search(){
         console.log("MANUAL SEARCH CLICKED");
         geoCode("MANUAL");
+      }
+
+      function startTutorial(exitOnOverlayClick){
+        introJs().setOptions({ 
+          'exitOnOverlayClick': exitOnOverlayClick, 
+          'showStepNumbers': 'false'
+        }).start();
       }
 
       console.log("Javascript loaded");

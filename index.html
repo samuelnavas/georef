@@ -69,16 +69,17 @@
           <button id="save-button" type="submit" class="btn btn-success" onclick="save()">
             <span id="save-icon" class="fa fa-download" aria-hidden="true"></span>
           </button> 
-          <button id="save-button" type="submit" class="btn btn-info" onclick="introJs().start()">
+          <button id="save-button" type="submit" class="btn btn-info" onclick="startTutorial('true')">
             <span id="save-icon" class="fa fa-info-circle" aria-hidden="true"></span>
           </button>
         </div>
         <div style="clear: both;"></div>
         <p></p>
+        <!--
         <form  method="post" role="form" action="action.cgi" enctype="multipart/form-data" id="submit" style="margin-right:10pt;">
           <b>Submit new video:</b>
           <input type="file" name="nombre" class="form-control" disabled>
-        </form> <p></p>
+        </form> <p></p> -->
         <form id="select" style="margin-right:10pt;"
               data-intro='<b>Welcome to the GeoRef Videos WebApp! </b><br></br>
                           This is the <b>video selector</b>, you can try selecting the video called <b>Route2</b>' 
@@ -144,7 +145,7 @@
           </br><b>Sugested places:</b>
           <ul id="sugestedPlaces" class="places" style="list-style-type:none">
           </ul>
-          </br><b>Manual search:</b>
+          <b>Manual search:</b>
           <div class="input-group">
             <span class="input-group-btn">
               <button class="btn btn-default" type="button" onclick="search()">
@@ -195,8 +196,6 @@
             integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" 
             crossorigin="anonymous"></script>
     <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
-    <script src="http://maps.google.com/maps/api/js?v=3.2&sensor=false"></script>
-    <script src="http://matchingnotes.com/javascripts/leaflet-google.js"></script>
     <script type="text/javascript" src="introjs/intro.js"></script>
     <script type="text/javascript" src="js/waypoint.js"></script>
     <script type="text/javascript" src="js/keyboard.js"></script>
