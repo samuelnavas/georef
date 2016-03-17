@@ -19,5 +19,5 @@ This study proposes and evaluate a new method for the manual capture and extract
 - Intro.js
 - Font Awesome
 
-### Licence
-This code is licenced under GNU v3
+### License
+Apache License 2.0
