@@ -1,7 +1,7 @@
 # GeoRef
 A manual georeference of walkthrough videos prototype. 
 
-**DEMO:** http://samuelnavas.github.io/georef/
+**DEMO:** http://snavas.github.io/georef/
 
 ### Abstract
 
